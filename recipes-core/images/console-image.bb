@@ -25,7 +25,6 @@ WIFI_SUPPORT = " \
     linux-firmware-rtl8192cu \
     linux-firmware-rtl8192su \
     linux-firmware-wl18xx \
-    wireless-tools \
     wpa-supplicant \
 "
 
@@ -55,7 +54,6 @@ DEV_SDK_INSTALL = " \
     perl-modules \
     pkgconfig \
     python-modules \
-    python3-modules \
     strace \
     mtd-utils \
     libmosquittopp1 \
