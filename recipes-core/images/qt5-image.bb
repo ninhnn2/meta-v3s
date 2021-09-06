@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.jumpnowtek.com"
 
 require console-image.bb
 
-#inherit populate_sdk_qt5
+inherit populate_sdk_qt5
 
 QT_DEV_TOOLS = " \
 qtserialport-dev \
