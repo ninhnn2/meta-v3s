@@ -21,11 +21,12 @@ BOOTDD_VOLUME_ID ?= "${MACHINE}"
 
 # Boot partition size [in KiB]
 BOOT_SPACE ?= "6144"
+#ROOTFS_SIZE = "4194304"
 
-#FANNING_ROOTFS_SIZE = "50000"
+#FANNING_ROOTFS_SIZE = "500000"
 
 # First partition begin at sector 2048 : 2048*1024 = 2097152
-IMAGE_ROOTFS_ALIGNMENT = "2048"
+IMAGE_ROOTFS_ALIGNMENT = "4096"
 
 # Use an uncompressed ext4 by default as rootfs
 SDIMG_ROOTFS_TYPE ?= "ext4"
@@ -46,11 +47,11 @@ IMAGE_CMD_sunxi-sdimg () {
 
 	# Align partitions
 	BOOT_SPACE_ALIGNED=$(expr ${BOOT_SPACE} + ${IMAGE_ROOTFS_ALIGNMENT} - 1)
-	#echo "BOOT_SPACE_ALIGNED: ${BOOT_SPACE_ALIGNED}" > /home/fanning/Desktop/fuck.txt
+	echo "BOOT_SPACE_ALIGNED: ${BOOT_SPACE_ALIGNED}" > /home/fanning/Desktop/fuck.txt
 	BOOT_SPACE_ALIGNED=$(expr ${BOOT_SPACE_ALIGNED} - ${BOOT_SPACE_ALIGNED} % ${IMAGE_ROOTFS_ALIGNMENT})
 	#echo "BOOT_SPACE_ALIGNED: ${BOOT_SPACE_ALIGNED}" >> /home/fanning/Desktop/fuck.txt
-	SDIMG_SIZE=$(expr ${IMAGE_ROOTFS_ALIGNMENT} + ${BOOT_SPACE_ALIGNED} + $ROOTFS_SIZE + ${IMAGE_ROOTFS_ALIGNMENT})
-	#echo "SDIMG_SIZE: ${SDIMG_SIZE}" >> /home/fanning/Desktop/fuck.txt
+	SDIMG_SIZE=$(expr ${IMAGE_ROOTFS_ALIGNMENT} + ${BOOT_SPACE_ALIGNED} + ${ROOTFS_SIZE} + ${IMAGE_ROOTFS_ALIGNMENT})
+	echo "SDIMG_SIZE: ${SDIMG_SIZE}" >> /home/fanning/Desktop/fuck.txt
 
 	# Initialize sdcard image file
 	dd if=/dev/zero of=${SDIMG} bs=1 count=0 seek=$(expr 1024 \* ${SDIMG_SIZE})
